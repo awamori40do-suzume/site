@@ -1,0 +1,49 @@
+
+@charset "utf-8";
+.hov:hover{
+    background: #cfffcf;   
+}
+.menu2.active:hover{
+     color: #333;
+}
+.mainimg2{
+    position: absolute;
+
+}
+.mainimg3{
+    opacity: 0;
+}
+.mainimg4{
+    width: 100%;
+    height: auto;
+}
+.mv02{
+    animation: fadeIn 2s ease 0s 1 normal;
+    -webkit-animation: fadeIn 2s ease 0s 1 normal;
+	/*opacity:100%;
+	-webkit-opacity:100%;*/
+}
+
+@keyframes fadeIn {
+    0% {opacity: 0}
+    100% {opacity: 1}
+}
+
+@-webkit-keyframes fadeIn {
+    0% {opacity: 0}
+    100% {opacity: 1}
+}
+
+.slide {
+    height: 40px;
+    background: #666;
+}
+.slick-box{  
+    width: 10px;
+    height: 20px;
+}
+
+.slick-box img{
+    width: 10px;
+    height: 10px;
+}

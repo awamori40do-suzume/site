@@ -1,0 +1,109 @@
+@charset "utf-8";
+/*----reset----*/
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    margin: 0 auto;
+    padding: 0;
+    
+}
+header ul{
+    list-style: none;
+    display: -webkit-flex;
+    display: flex;
+    text-align: center;
+    background: #323232;
+    height: 40px;
+}
+.img{
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+    width: 50%;
+    height: 50%;
+}
+
+a{
+    text-decoration: none;
+}
+
+/*----style----*/
+.logo{
+    display: none;
+}
+.rogo{
+    text-align: center;
+    margin: 0 auto;
+}
+.rogo img{
+    width: 20%;
+    height: 20%;}
+
+.mainimg{
+    width: 100%;
+    height: auto;
+}    
+
+header  ul:first-child{
+   padding-left: 10%; 
+}
+header  ul:last-child{
+    padding-right: 10%;
+}
+.menu{  
+    width: 100%;
+    height: auto;
+    padding-top: 5px;
+    }
+
+
+.menu a{
+    width: 100%;
+    height:0 auto;
+    color: #fff;
+    font-size: 0.5em;
+
+}
+.fb2{
+    list-style: none;
+    display: -webkit-flex;
+    display: flex;
+    width: 80%;
+    height: auto;
+    margin: 0 auto;
+} 
+.fb2 li{
+    width: 100%;
+    height: 100%;
+}
+.fb2 *{
+    margin: 0 auto;
+}
+.fb2 li *{
+    width: 50%;
+    height: 50%;
+    float: left;
+    color: #191919;
+    font-size: 0.5em;
+}
+/*----media----*/
+@media screen and (min-width: 720px) {
+
+    .menu-trigger{
+        display: none;
+    }  
+   
+    .menu2{
+        display: none;
+    }
+.menu2{
+        display: none;
+    position: fixed;
+    }
+    .menu2 a{
+        display: none;
+        position: fixed;
+}
+
