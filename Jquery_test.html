@@ -66,8 +66,7 @@
 
     <script>
         $(document).ready(function() {
-            let currentQuestion = 1;
-
+            
             $('.yesButton').click(function() {
                 $('.initial-question').fadeOut(function() {
                     $('.questions,.question1').fadeIn();
@@ -88,35 +87,27 @@
                     $('.restart').fadeIn(); // 訴求画面での「最初から質問する」ボタンを表示
                 });
             });
-            $('.yesButton3').click(function() {
-                $('.questions,.question3').fadeOut(function() {
-                    $('.questions,.question4').fadeIn();
-                    $('.restart').fadeIn(); // 訴求画面での「最初から質問する」ボタンを表示
-                });
-            });
 
-            $('.yesButton4').click(function() {
+            $('.yesButton3').click(function() {
                 $('.questions').fadeOut(function() {
                     $('.call-to-action2').fadeIn();
                     $('.restart').fadeIn(); // 訴求画面での「最初から質問する」ボタンを表示
                 });
                 
             });
-            $(document).on('click', '.noButton', function() {
+            $('.noButton').click(function() {
                 $('.initial-question').fadeOut(function() {
                     $('.call-to-action').fadeIn();
                     $('.restart').fadeIn(); // 訴求画面での「最初から質問する」ボタンを表示
                 });
             });
-
-            $(document).on('click', '.restartButton', function() {
+            $('.restartButton').click(function() {
                 $('.questions, .call-to-action, .call-to-action2').fadeOut(function() {
                     $('.question, .call-to-action, .call-to-action2').hide(); // 全ての質問を非表示
                     $('.initial-question').fadeIn(function() {
                         $('.restart').fadeIn(); // 初期質問セクションの「最初から質問する」ボタンも表示
                     });
                 });
-                currentQuestion = 1; // 質問のカウントリセット
             });
 
         });
