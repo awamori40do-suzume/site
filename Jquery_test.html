@@ -9,6 +9,9 @@
         .restart {
             display: none; /* 初期状態では非表示 */
         }
+        .transitionToCTA {
+            display: none; /* 初期状態では非表示 */
+        }
     </style>
 </head>
 <body>
@@ -19,10 +22,12 @@
             <img id="yesButton" src="yes-button.png" alt="Yes" style="cursor:pointer;">
             <img id="noButton" src="no-button.png" alt="No" style="cursor:pointer;">
         </div>
+        
         <div id="questions" style="display:none;">
             <div id="question1" class="question" style="display:none;">
                 <p>質問1: 質問1の内容</p>
                 <img class="nextButton" src="next-button.png" alt="次へ" style="cursor:pointer;">
+                <img class="transitionToCTA" src="cta-button.png" alt="訴求画面へ" style="cursor:pointer;">
                 <div class="restart">
                     <img class="restartButton" src="restart-button.png" alt="最初から質問する" style="cursor:pointer;">
                 </div>
@@ -30,17 +35,20 @@
             <div id="question2" class="question" style="display:none;">
                 <p>質問2: 質問2の内容</p>
                 <img class="nextButton" src="next-button.png" alt="次へ" style="cursor:pointer;">
+                <img class="transitionToCTA" src="cta-button.png" alt="訴求画面へ" style="cursor:pointer;">
                 <div class="restart">
                     <img class="restartButton" src="restart-button.png" alt="最初から質問する" style="cursor:pointer;">
                 </div>
             </div>
             <div id="question3" class="question" style="display:none;">
                 <p>質問3: 質問3の内容</p>
+                <img class="transitionToCTA" src="cta-button.png" alt="訴求画面へ" style="cursor:pointer;">
                 <div class="restart">
                     <img class="restartButton" src="restart-button.png" alt="最初から質問する" style="cursor:pointer;">
                 </div>
             </div>
         </div>
+
         <div id="call-to-action" style="display:none;">
             <p>訴求画面: 訴求内容を表示</p>
             <div class="restart">
@@ -58,6 +66,7 @@
                     $('#questions').fadeIn();
                     showQuestion(currentQuestion);
                     $('.restart').fadeIn(); // 質問セクションでの「最初から質問する」ボタンを表示
+                    $('.transitionToCTA').fadeIn(); // 各質問に訴求画面へのボタンを表示
                 });
             });
 
@@ -75,6 +84,7 @@
                         $('.restart').fadeIn(); // 初期質問セクションの「最初から質問する」ボタンも表示
                     });
                 });
+                currentQuestion = 1; // 質問のカウントリセット
             });
 
             $(document).on('click', '.nextButton', function() {
@@ -83,6 +93,13 @@
                     if (currentQuestion <= 3) {
                         showQuestion(currentQuestion);
                     }
+                });
+            });
+
+            $(document).on('click', '.transitionToCTA', function() {
+                $('#questions').fadeOut(function() {
+                    $('#call-to-action').fadeIn();
+                    $('.restart').fadeIn(); // 訴求画面での「最初から質問する」ボタンを表示
                 });
             });
 
