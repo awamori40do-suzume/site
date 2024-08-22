@@ -5,11 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>質問フロー</title>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <style>
-        .hidden {
-            display: none;
-        }
-    </style>
 </head>
 <body>
 
@@ -19,15 +14,15 @@
             <button id="yesButton">Yes</button>
             <button id="noButton">No</button>
         </div>
-        <div id="questions" class="hidden">
-            <p id="question1" class="hidden">質問1: 質問1の内容</p>
-            <p id="question2" class="hidden">質問2: 質問2の内容</p>
-            <p id="question3" class="hidden">質問3: 質問3の内容</p>
+        <div id="questions" style="display:none;">
+            <p id="question1" style="display:none;">質問1: 質問1の内容</p>
+            <p id="question2" style="display:none;">質問2: 質問2の内容</p>
+            <p id="question3" style="display:none;">質問3: 質問3の内容</p>
         </div>
-        <div id="call-to-action" class="hidden">
+        <div id="call-to-action" style="display:none;">
             <p>訴求画面: 訴求内容を表示</p>
         </div>
-        <div id="restart" class="hidden">
+        <div id="restart" style="display:none;">
             <button id="restartButton">最初から質問する</button>
         </div>
     </div>
@@ -37,31 +32,33 @@
             let currentQuestion = 1;
 
             $('#yesButton').click(function() {
-                $('#initial-question').hide();
-                $('#questions').show();
-                showQuestion();
-                $('#restart').show();
+                $('#initial-question').fadeOut(function() {
+                    $('#questions').fadeIn();
+                    showQuestion();
+                    $('#restart').fadeIn();
+                });
             });
 
             $('#noButton').click(function() {
-                $('#initial-question').hide();
-                $('#call-to-action').show();
-                $('#restart').show();
+                $('#initial-question').fadeOut(function() {
+                    $('#call-to-action').fadeIn();
+                    $('#restart').fadeIn();
+                });
             });
 
             $('#restartButton').click(function() {
                 currentQuestion = 1;
-                $('#questions').hide();
-                $('#call-to-action').hide();
-                $('#initial-question').show();
-                $('#restart').hide();
-                $('.hidden').hide();
+                $('#questions, #call-to-action, #restart').fadeOut(function() {
+                    $('#initial-question').fadeIn();
+                    $('.question').hide();  // 全ての質問を非表示
+                });
             });
 
             function showQuestion() {
                 if (currentQuestion <= 3) {
-                    $('#question' + currentQuestion).show();
-                    currentQuestion++;
+                    $('#question' + currentQuestion).fadeIn(function() {
+                        currentQuestion++;
+                    });
                 } else {
                     alert('質問が終了しました。');
                 }
