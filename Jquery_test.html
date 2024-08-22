@@ -15,9 +15,18 @@
             <button id="noButton">No</button>
         </div>
         <div id="questions" style="display:none;">
-            <p id="question1" style="display:none;">質問1: 質問1の内容</p>
-            <p id="question2" style="display:none;">質問2: 質問2の内容</p>
-            <p id="question3" style="display:none;">質問3: 質問3の内容</p>
+            <div id="question1" style="display:none;">
+                <p>質問1: 質問1の内容</p>
+                <button class="nextButton">次へ</button>
+            </div>
+            <div id="question2" style="display:none;">
+                <p>質問2: 質問2の内容</p>
+                <button class="nextButton">次へ</button>
+            </div>
+            <div id="question3" style="display:none;">
+                <p>質問3: 質問3の内容</p>
+                <button id="finishButton">終了</button>
+            </div>
         </div>
         <div id="call-to-action" style="display:none;">
             <p>訴求画面: 訴求内容を表示</p>
@@ -34,7 +43,7 @@
             $('#yesButton').click(function() {
                 $('#initial-question').fadeOut(function() {
                     $('#questions').fadeIn();
-                    showQuestion();
+                    showQuestion(currentQuestion);
                     $('#restart').fadeIn();
                 });
             });
@@ -54,15 +63,26 @@
                 });
             });
 
-            function showQuestion() {
-                if (currentQuestion <= 3) {
-                    $('#question' + currentQuestion).fadeIn(function() {
-                        currentQuestion++;
-                    });
-                } else {
-                    alert('質問が終了しました。');
-                }
+            $(document).on('click', '.nextButton', function() {
+                $('#question' + currentQuestion).fadeOut(function() {
+                    currentQuestion++;
+                    if (currentQuestion <= 3) {
+                        showQuestion(currentQuestion);
+                    }
+                });
+            });
+
+            function showQuestion(questionNumber) {
+                $('#question' + questionNumber).fadeIn();
             }
+
+            $('#finishButton').click(function() {
+                alert('質問が終了しました。');
+                $('#questions').fadeOut(function() {
+                    $('#initial-question').fadeIn();
+                    currentQuestion = 1;
+                });
+            });
         });
     </script>
 
