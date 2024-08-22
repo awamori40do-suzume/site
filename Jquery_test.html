@@ -15,29 +15,32 @@
             <button id="noButton">No</button>
         </div>
         <div id="questions" style="display:none;">
-            <div id="question1" style="display:none;">
+            <div id="question1" class="question" style="display:none;">
                 <p>質問1: 質問1の内容</p>
                 <button class="nextButton">次へ</button>
-                <div id="restart" style="display:none;">
+                <div id="restart">
                     <button class="restartButton">最初から質問する</button>
                 </div>
             </div>
-            <div id="question2" style="display:none;">
+            <div id="question2" class="question" style="display:none;">
                 <p>質問2: 質問2の内容</p>
                 <button class="nextButton">次へ</button>
-                <div id="restart" style="display:none;">
+                <div id="restart">
                     <button class="restartButton">最初から質問する</button>
                 </div>
             </div>
-            <div id="question3" style="display:none;">
+            <div id="question3" class="question" style="display:none;">
                 <p>質問3: 質問3の内容</p>
-                <div id="restart" style="display:none;">
+                <div id="restart">
                     <button class="restartButton">最初から質問する</button>
                 </div>
             </div>
         </div>
         <div id="call-to-action" style="display:none;">
             <p>訴求画面: 訴求内容を表示</p>
+            <div id="restart">
+                <button class="restartButton">最初から質問する</button>
+            </div>
         </div>
     </div>
 
@@ -49,14 +52,12 @@
                 $('#initial-question').fadeOut(function() {
                     $('#questions').fadeIn();
                     showQuestion(currentQuestion);
-                    $('#question' + currentQuestion + ' .restartButton').fadeIn(); // 現在の質問に最初から戻るボタンを表示
                 });
             });
 
             $('#noButton').click(function() {
                 $('#initial-question').fadeOut(function() {
                     $('#call-to-action').fadeIn();
-                    $('#question' + currentQuestion + ' .restartButton').fadeIn(); // 最初から戻るボタンを表示
                 });
             });
 
@@ -65,7 +66,6 @@
                 $('#questions, #call-to-action').fadeOut(function() {
                     $('.question').hide();  // 全ての質問を非表示
                     $('#initial-question').fadeIn();
-                    $('.restartButton').fadeOut(); // 最初から質問するボタンを非表示
                 });
             });
 
@@ -74,7 +74,6 @@
                     currentQuestion++;
                     if (currentQuestion <= 3) {
                         showQuestion(currentQuestion);
-                        $('#question' + currentQuestion + ' .restartButton').fadeIn(); // 次の質問に最初から戻るボタンを表示
                     }
                 });
             });
