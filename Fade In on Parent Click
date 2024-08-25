@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fade In on Parent Click</title>
+    <style>
+        .fade-item {
+            display: none; /* 初期状態で非表示 */
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            margin: 10px;
+        }
+
+        .parent {
+            cursor: pointer; /* クリック可能にする */
+            padding: 10px;
+            background-color: lightgray;
+            margin-bottom: 20px;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+<div id="parent1" class="parent">
+    Click to fade in items in Parent 1
+    <div class="fade-item">Parent 1 - Item 1</div>
+    <div class="fade-item">Parent 1 - Item 2</div>
+</div>
+
+<div id="parent2" class="parent">
+    Click to fade in items in Parent 2
+    <div class="fade-item">Parent 2 - Item 1</div>
+    <div class="fade-item">Parent 2 - Item 2</div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // 親要素を取得
+        var parents = document.getElementsByClassName('parent');
+
+        // すべての親要素にクリックイベントを追加
+        for (var i = 0; i < parents.length; i++) {
+            parents[i].addEventListener('click', function() {
+                // クリックされた親要素内のfade-item要素を取得
+                var fadeItems = this.getElementsByClassName('fade-item');
+                
+                // 各fade-item要素をフェードイン
+                for (var j = 0; j < fadeItems.length; j++) {
+                    $(fadeItems[j]).fadeIn(1000); // フェードインを適用
+                }
+            });
+        }
+    });
+</script>
+
+</body>
+</html>
