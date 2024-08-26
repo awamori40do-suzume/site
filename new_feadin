@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>質問フロー</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <style>
+        .restart {
+            display: none; /* 初期状態では非表示 */
+        }
+        .transitionToCTA {
+            display: none; /* 初期状態では非表示 */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main1">
+    <div class="question-container">
+        <div class="initial-question">
+            <p>初めの質問: はい or いいえ?</p>
+            <img class="yesButton" src="yes-button.png" alt="Yes" style="cursor:pointer;">
+            <img class="noButton" src="no-button.png" alt="No" style="cursor:pointer;">
+        </div>
+        
+        <div class="questions" style="display:none;">
+            <div class="question1 question" style="display:none;">
+                <p>質問1: 質問1の内容</p>
+                <img class="yesButton1" src="next-button.png" alt="次へ" style="cursor:pointer;">
+                <img class="transitionToCTA" src="cta-button.png" alt="訴求画面へ" style="cursor:pointer;">
+                <div class="restart">
+                    <img class="restartButton" src="restart-button.png" alt="最初から質問する" style="cursor:pointer;">
+                </div>
+            </div>
+            <div class="question2 question" style="display:none;">
+                <p>質問2: 質問2の内容</p>
+                <img class="yesButton2" src="next-button.png" alt="次へ" style="cursor:pointer;">
+                <img class="transitionToCTA" src="cta-button.png" alt="訴求画面へ" style="cursor:pointer;">
+                <div class="restart">
+                    <img class="restartButton" src="restart-button.png" alt="最初から質問する" style="cursor:pointer;">
+                </div>
+            </div>
+            <div class="question3 question" style="display:none;">
+                <p>質問3: 質問3の内容</p>
+                <img class="yesButton3" src="yes-button.png" alt="Yes" style="cursor:pointer;">
+                <img class="transitionToCTA" src="cta-button.png" alt="訴求画面へ" style="cursor:pointer;">
+                <div class="restart">
+                    <img class="restartButton" src="restart-button.png" alt="最初から質問する" style="cursor:pointer;">
+                </div>
+            </div>
+        </div>
+
+        <div class="call-to-action" style="display:none;">
+            <p>訴求画面: 訴求内容を表示</p>
+            <div class="restart">
+                <img class="restartButton" src="restart-button.png" alt="最初から質問する" style="cursor:pointer;">
+            </div>
+        </div>
+        <div class="call-to-action2" style="display:none;">
+            <p>訴求画面2: 訴求内容を表示</p>
+            <div class="restart">
+                <img class="restartButton" src="restart-button.png" alt="最初から質問する" style="cursor:pointer;">
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="main2">
+    <div class="question-container">
+        <div class="initial-question">
+            <p>初めの質問: はい or いいえ?</p>
+            <img class="yesButton" src="yes-button.png" alt="Yes" style="cursor:pointer;">
+            <img class="noButton" src="no-button.png" alt="No" style="cursor:pointer;">
+        </div>
+        
+
+        <div class="questions" style="display:none;">
+            <div class="question1 question" style="display:none;">
+                <p>質問1: 質問1の内容</p>
+                <img class="yesButton1" src="next-button.png" alt="次へ" style="cursor:pointer;">
+                <img class="transitionToCTA" src="cta-button.png" alt="訴求画面へ" style="cursor:pointer;">
+                <div class="restart">
+                    <img class="restartButton" src="restart-button.png" alt="最初から質問する" style="cursor:pointer;">
+                </div>
+            </div>
+            <div class="question2 question" style="display:none;">
+                <p>質問2: 質問2の内容</p>
+                <img class="yesButton2" src="next-button.png" alt="次へ" style="cursor:pointer;">
+                <img class="transitionToCTA" src="cta-button.png" alt="訴求画面へ" style="cursor:pointer;">
+                <div class="restart">
+                    <img class="restartButton" src="restart-button.png" alt="最初から質問する" style="cursor:pointer;">
+                </div>
+            </div>
+            <div class="question3 question" style="display:none;">
+                <p>質問3: 質問3の内容</p>
+                <img class="yesButton3" src="yes-button.png" alt="Yes" style="cursor:pointer;">
+                <img class="transitionToCTA" src="cta-button.png" alt="訴求画面へ" style="cursor:pointer;">
+                <div class="restart">
+                    <img class="restartButton" src="restart-button.png" alt="最初から質問する" style="cursor:pointer;">
+                </div>
+            </div>
+        </div>
+
+        <div class="call-to-action" style="display:none;">
+            <p>訴求画面: 訴求内容を表示</p>
+            <div class="restart">
+                <img class="restartButton" src="restart-button.png" alt="最初から質問する" style="cursor:pointer;">
+            </div>
+        </div>
+        <div class="call-to-action2" style="display:none;">
+            <p>訴求画面2: 訴求内容を表示</p>
+            <div class="restart">
+                <img class="restartButton" src="restart-button.png" alt="最初から質問する" style="cursor:pointer;">
+            </div>
+        </div>
+    </div>
+</div>
+    <script>
+        $(document).ready(function() {
+    // main1の操作
+    setupQuestionFlow('.main1');
+
+    // main2の操作
+    setupQuestionFlow('.main2');
+
+    function setupQuestionFlow(mainSelector) {
+        const $main = $(mainSelector);
+
+        $main.find('.yesButton').click(function() {
+            $main.find('.initial-question').fadeOut(function() {
+                $main.find('.questions,.question1').fadeIn();
+                $main.find('.restart').fadeIn(); // 質問セクションでの「最初から質問する」ボタンを表示
+                $main.find('.transitionToCTA').fadeIn(); // 各質問に訴求画面へのボタンを表示
+            });
+        });
+
+        $main.find('.yesButton1').click(function() {
+            $main.find('.questions,.question1').fadeOut(function() {
+                $main.find('.questions,.question2').fadeIn();
+                $main.find('.restart').fadeIn(); // 訴求画面での「最初から質問する」ボタンを表示
+            });
+        });
+
+        $main.find('.yesButton2').click(function() {
+            $main.find('.questions,.question2').fadeOut(function() {
+                $main.find('.questions,.question3').fadeIn();
+                $main.find('.restart').fadeIn(); // 訴求画面での「最初から質問する」ボタンを表示
+            });
+        });
+
+        $main.find('.yesButton3').click(function() {
+            $main.find('.questions').fadeOut(function() {
+                $main.find('.call-to-action2').fadeIn();
+                $main.find('.restart').fadeIn(); // 訴求画面での「最初から質問する」ボタンを表示
+            });
+        });
+
+        $main.find('.noButton').click(function() {
+            $main.find('.initial-question').fadeOut(function() {
+                $main.find('.call-to-action').fadeIn();
+                $main.find('.restart').fadeIn(); // 訴求画面での「最初から質問する」ボタンを表示
+            });
+        });
+
+        $main.find('.restartButton').click(function() {
+            $main.find('.questions, .call-to-action, .call-to-action2').fadeOut(function() {
+                $main.find('.question, .call-to-action, .call-to-action2').hide(); // 全ての質問を非表示
+                $main.find('.initial-question').fadeIn(function() {
+                    $main.find('.restart').fadeIn(); // 初期質問セクションの「最初から質問する」ボタンも表示
+                });
+            });
+        });
+    }
+});
+    </script>
+
+</body>
+</html>
