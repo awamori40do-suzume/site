@@ -1,0 +1,77 @@
+$(document).ready(function() {
+    setupQuestionFlow('.main1', 'main1');
+    setupQuestionFlow('.main2', 'main2');
+
+    function setupQuestionFlow(mainSelector, storageKey) {
+        const $main = $(mainSelector);
+
+        // 状態の復元
+        restoreState($main, storageKey);
+
+        $main.find('.yesButton').click(function() {
+            $main.find('.initial-question').fadeOut(function() {
+                $main.find('.questions,.question1').fadeIn();
+                $main.find('.restart').fadeIn();
+                $main.find('.transitionToCTA').fadeIn();
+                saveState(storageKey, '.question1');
+            });
+        });
+
+        $main.find('.yesButton1').click(function() {
+            $main.find('.questions,.question1').fadeOut(function() {
+                $main.find('.questions,.question2').fadeIn();
+                $main.find('.restart').fadeIn();
+                saveState(storageKey, '.question2');
+            });
+        });
+
+        $main.find('.yesButton2').click(function() {
+            $main.find('.questions,.question2').fadeOut(function() {
+                $main.find('.questions,.question3').fadeIn();
+                $main.find('.restart').fadeIn();
+                saveState(storageKey, '.question3');
+            });
+        });
+
+        $main.find('.yesButton3').click(function() {
+            $main.find('.questions').fadeOut(function() {
+                $main.find('.call-to-action2').fadeIn();
+                $main.find('.restart').fadeIn();
+                saveState(storageKey, '.call-to-action2');
+            });
+        });
+
+        $main.find('.noButton').click(function() {
+            $main.find('.initial-question').fadeOut(function() {
+                $main.find('.call-to-action').fadeIn();
+                $main.find('.restart').fadeIn();
+                saveState(storageKey, '.call-to-action');
+            });
+        });
+
+        $main.find('.restartButton').click(function() {
+            $main.find('.questions, .call-to-action, .call-to-action2').fadeOut(function() {
+                $main.find('.question, .call-to-action, .call-to-action2').hide();
+                $main.find('.initial-question').fadeIn(function() {
+                    $main.find('.restart').fadeIn();
+                    saveState(storageKey, '.initial-question');
+                });
+            });
+        });
+
+        // 状態を保存する関数
+        function saveState(storageKey, state) {
+            sessionStorage.setItem(storageKey, state);
+        }
+
+        // 状態を復元する関数
+        function restoreState($main, storageKey) {
+            const state = sessionStorage.getItem(storageKey);
+            if (state) {
+                $main.find('.initial-question, .questions, .question, .call-to-action, .call-to-action2').hide();
+                $main.find(state).fadeIn();
+                $main.find('.restart').fadeIn();
+            }
+        }
+    }
+});
