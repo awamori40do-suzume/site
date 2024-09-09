@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>お知らせ</title>
+    <script src="https://code.jquery.com/jquery-1.6.4.min.js"></script>
+</head>
+<body>
+
+<ul id="news">
+    <li data-date="2024-09-01">お知らせ1</li>
+    <li data-date="2024-09-05">お知らせ2</li>
+    <li data-date="2024-09-10">お知らせ3</li>
+</ul>
+
+<script>
+    $(document).ready(function () {
+        var now = new Date();
+        var twoWeeksAgo = new Date();
+        twoWeeksAgo.setDate(now.getDate() - 14); // 現在の日付から14日前を計算
+        
+        $('#news li').each(function () {
+            var itemDateStr = $(this).attr('data-date'); // data-date属性から日付を取得
+            var itemDate = new Date(itemDateStr);
+            
+            if (itemDate >= twoWeeksAgo) {
+                // お知らせが2週間以内の場合、「new」マークを表示
+                $(this).append(' <span class="new">NEW!</span>');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
